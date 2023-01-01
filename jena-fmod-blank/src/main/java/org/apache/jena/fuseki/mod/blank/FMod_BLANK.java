@@ -23,7 +23,7 @@ import org.apache.jena.fuseki.main.sys.FusekiModule;
 /**
  * Template.
  *
- * Move, rename and thenb update
+ * Move, rename and then update
  *
  * src/main/resources/META-INF/services/org.apache.jena.fuseki.main.sys.FusekiModule
  */

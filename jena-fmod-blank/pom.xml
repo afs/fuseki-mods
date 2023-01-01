@@ -6,24 +6,26 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>jena-fmod-blank</artifactId>
+  <groupId>org.some_group</groupId>
+  <version>0.0.9-SNAPSHOT</version>
+  <artifactId>fmod-blank</artifactId>
   <packaging>jar</packaging>
 
-  <parent>
-    <groupId>org.apache.jena</groupId>
-    <artifactId>jena-fmod</artifactId>
-    <version>0.0.0-SNAPSHOT</version>
-    <relativePath>..</relativePath>
+	 <parent>
+    	<groupId>org.apache.jena</groupId>
+    	<artifactId>jena-fmod</artifactId>
+    	<version>0.0.0-SNAPSHOT</version>
+    	<relativePath>..</relativePath> <!-- Set as needed -->
   </parent>
 
-  <name>Apache Jena - Fuseki Module Admin</name>
+  <name>Fuseki Module BLANK</name>
 
   <properties>
-    <automatic.module.name>org.apache.jena.fuseki.BLANK</automatic.module.name>
+    <automatic.module.name>org.some_group.BLANK</automatic.module.name>
   </properties>
 
   <dependencies>
-
+    
     <dependency>
       <groupId>org.apache.jena</groupId>
       <artifactId>jena-fuseki-main</artifactId>
@@ -43,7 +45,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.4.0</version>
         <configuration>
           <shadedArtifactAttached>false</shadedArtifactAttached>
 
@@ -65,14 +66,9 @@
           </transformers>
 
           <artifactSet>
-            <!--
+            <!-- Dependencies
             <includes>
-              <include>io.telicent.jena:jena-fuseki-kafka-module</include>
-              <include>io.telicent.jena:jena-kafka-connector</include>
-              <include>org.apache.kafka:kafka-clients</include>
-              <include>com.github.luben:zstd-jni</include>
-              <include>org.lz4:lz4-java</include>
-              <include>org.xerial.snappy:snappy-java</include>
+              <include>...</include>
             </includes>
             -->
           </artifactSet>
