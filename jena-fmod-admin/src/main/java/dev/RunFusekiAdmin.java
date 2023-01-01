@@ -28,6 +28,7 @@ import org.apache.jena.sparql.exec.QueryExec;
 import org.apache.jena.sparql.exec.RowSet;
 import org.apache.jena.sparql.exec.RowSetOps;
 import org.apache.jena.sparql.exec.UpdateExec;
+import org.apache.jena.sparql.exec.http.GSP;
 import org.apache.jena.sparql.exec.http.Params;
 
 public class RunFusekiAdmin {
@@ -79,13 +80,15 @@ public class RunFusekiAdmin {
                 .start();
 
 
+        String HOST = "localhost";
+        GSP.service("http://"+HOST+":"+server.getHttpPort()).defaultGraph().GET();
+
         //http://localhost:3030/$/datasets
         // Body: dbName=%2Fds&dbType=mem
 
         // Create!
         Params params = Params.create().add("dbName", "/ds2").add("dbType", "mem");
-        String HOST = "localhost";
-        String baseURL = "http://"+HOST+":"+server.getHttpPort();
+       String baseURL = "http://"+HOST+":"+server.getHttpPort();
 
         HttpOp.httpPostForm(baseURL+"/$/datasets", params);
 

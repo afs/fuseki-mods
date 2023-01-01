@@ -30,6 +30,7 @@ import org.apache.jena.fuseki.Fuseki;
 import org.apache.jena.fuseki.FusekiConfigException;
 import org.apache.jena.fuseki.ctl.ActionCtl;
 import org.apache.jena.fuseki.main.FusekiServer;
+import org.apache.jena.fuseki.main.cmds.FusekiMain;
 import org.apache.jena.fuseki.main.sys.FusekiModule;
 import org.apache.jena.fuseki.mgt.ActionBackup;
 import org.apache.jena.fuseki.mgt.ActionBackupList;
@@ -62,12 +63,7 @@ public class FMod_Admin implements FusekiModule {
         FusekiWebapp.formatBaseArea();
 
         ArgModuleGeneral amg = new ArgModuleAdmin();
-
-        // FuskeiModule loading occurs before the command line is processed.
-        //FusekiMainCmd.add(ArgDecl);
-
-        System.err.println("To do: Add command line argument to FusekiMainCmd");
-        //FusekiMainCmd.add(amg);
+        FusekiMain.addArgModule(amg);
     }
 
     // Modules add command line args?
@@ -131,17 +127,22 @@ public class FMod_Admin implements FusekiModule {
         // Modify the server to include the admin operations.
         ActionCtl actionBackup = new ActionBackup();
         builder
-            // Admin.
+//            // Before the Fuseki filter!
+//            .addFilter("/$/*", new LocalhostOnly())
+
+            // Information
             .addServlet("/$/datasets", new ActionDatasets())
+            //.addServlet("/$/stats", new ActionDatasets())
+            .addServlet("/$/server", new ActionServerStatus())
+
+            // Require admin user
             .addServlet("/$/backup", actionBackup)
             .addServlet("/$/backups", actionBackup)
             .addServlet("/$/backups-list", new ActionBackupList())
-            // Before the Fuseki filter!
-            .addFilter("/$/*", new LocalhostOnly())
 
             // General server functions.
             //.addServlet("/$/datasets", new ActionDatasets()) -- UI has a restricted version
-            .addServlet("/$/server", new ActionServerStatus())
+
             .enablePing(true)
             .enableStats(true)
             // Not required but helpful.

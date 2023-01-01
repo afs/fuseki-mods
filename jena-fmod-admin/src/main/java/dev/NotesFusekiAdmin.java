@@ -25,7 +25,16 @@ import org.apache.jena.sparql.core.DatasetGraph;
 import org.apache.jena.sparql.core.DatasetGraphFactory;
 
 public class NotesFusekiAdmin {
+
+    // [ ] FusekiServer contetx object
+
     // [ ] Fuseki main+admin
+    // [ ] FusekiServer.admin() ->
+    //
+
+    // Password
+    //   Special filter for /$/ -- not all need password.
+    //
 
     // ---
     // Modules add command line args?
