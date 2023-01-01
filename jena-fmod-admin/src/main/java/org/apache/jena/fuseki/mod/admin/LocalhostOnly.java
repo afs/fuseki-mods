@@ -93,5 +93,3 @@ public class LocalhostOnly implements Filter {
         return localhosts.contains(request.getRemoteAddr()) ;
     }
 }
-
-
