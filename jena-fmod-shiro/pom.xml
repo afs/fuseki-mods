@@ -20,7 +20,7 @@
 
   <properties>
     <automatic.module.name>org.apache.jena.fuseki.shiro</automatic.module.name>
-    <ver.shiro>1.10.1</ver.shiro>
+    <ver.shiro>1.11.0</ver.shiro>
   </properties>
 
   <dependencies>
