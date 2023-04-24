@@ -34,13 +34,23 @@ import org.slf4j.Logger;
 
 public class FMod_UI implements FusekiModule {
 
+    private static FusekiModule singleton = new FMod_UI();
+    public static FusekiModule get() {
+        return singleton;
+    }
+
     public FMod_UI() {}
 
     private static Logger LOG = Fuseki.configLog;
 
     @Override
+    public void start() {
+        Fuseki.serverLog.info("FMod UI");
+    }
+
+    @Override
     public String name() {
-        return "UI";
+        return "FMod UI";
     }
 
     // Before FMod_admin
@@ -49,6 +59,9 @@ public class FMod_UI implements FusekiModule {
 
     @Override
     public void prepare(FusekiServer.Builder builder, Set<String> datasetNames, Model configModel) {
+
+        LOG.info("Fuseki UI load");
+
         if ( builder.staticFileBase() != null ) {
             LOG.info("Static content location has already been set: "+builder.staticFileBase());
             return;
@@ -69,6 +82,7 @@ public class FMod_UI implements FusekiModule {
         FmtLog.info(this.getClass(), "UI Base = %s", uiAppLocation);
 
         // Modify the server to include the UI and any server-side servlets needed by the UI.
+        // Only add .addServlet("/$/datasets", new DummyActionDatasets()) if Admin not available.
         builder
             .staticFileBase(uiAppLocation)
             // Required functions. Dummies.

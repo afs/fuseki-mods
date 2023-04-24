@@ -66,7 +66,12 @@ public class FMod_Shiro implements FusekiModule {
      */
 
     @Override
-    public String name() { return "ModShiro"; }
+    public void start() {
+        Fuseki.serverLog.info("FMod Shiro");
+    }
+
+    @Override
+    public String name() { return "FMod Shiro"; }
 
     @Override public void prepare(FusekiServer.Builder serverBuilder, Set<String> datasetNames, Model configModel) {
         if ( ! Objects.equals("disabled", Lib.getenv("FUSEKI_SHIRO") ) ) {

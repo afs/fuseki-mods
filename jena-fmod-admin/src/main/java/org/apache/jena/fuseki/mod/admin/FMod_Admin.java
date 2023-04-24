@@ -39,12 +39,18 @@ import org.slf4j.Logger;
 
 public class FMod_Admin implements FusekiModule {
 
+    private static FusekiModule singleton = new FMod_Admin();
+    public static FusekiModule get() {
+        return singleton;
+    }
+
     public FMod_Admin() {}
 
     private static Logger LOG = Fuseki.configLog;
 
     @Override
     public void start() {
+        Fuseki.serverLog.info("FMod Admin");
         ArgModuleGeneral amg = new ArgModuleAdmin();
         FusekiMain.addArgModule(amg);
     }
@@ -74,7 +80,11 @@ public class FMod_Admin implements FusekiModule {
 
     @Override
     public void prepare(FusekiServer.Builder builder, Set<String> datasetNames, Model configModel) {
+
+        LOG.info("Fuseki Admin load");
+
         FusekiApp.setup();
+
         String configDir = FusekiApp.dirConfiguration.toString();
         List<DataAccessPoint> directoryDatabases = FusekiConfig.readConfigurationDirectory(configDir);
 
@@ -100,6 +110,7 @@ public class FMod_Admin implements FusekiModule {
                 // // Before the Fuseki filter!
                 // .addFilter("/$/*", new LocalhostOnly())
 
+        // ** Need POST
                 .addServlet("/$/datasets", new ActionDatasets())
                 // .addServlet("/$/stats", new ActionDatasets())
                 .addServlet("/$/server", new ActionServerStatus())

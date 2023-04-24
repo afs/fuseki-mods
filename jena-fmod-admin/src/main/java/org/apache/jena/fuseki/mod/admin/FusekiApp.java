@@ -118,7 +118,9 @@ public class FusekiApp {
             FUSEKI_BASE = Path.of(x2);
         }
 
-        FmtLog.info(Fuseki.configLog, "FusekiEnv: FUSEKI_BASE = %s", FUSEKI_BASE);
+        FUSEKI_BASE = FUSEKI_BASE.toAbsolutePath();
+
+        FmtLog.info(Fuseki.configLog, "FUSEKI_BASE=%s", FUSEKI_BASE);
         if ( Files.isRegularFile(FUSEKI_BASE) )
             throw new FusekiConfigException("FUSEKI_BASE exists but is a file");
         if ( ! Files.exists(FUSEKI_BASE) ) {
@@ -130,13 +132,12 @@ public class FusekiApp {
         }
         if ( ! Files.isWritable(FUSEKI_BASE) )
             throw new FusekiConfigException("FUSEKI_BASE exists but is not writable");
-
-        FUSEKI_BASE = FUSEKI_BASE.toAbsolutePath();
     }
 
     static void setup() {
         // Command line arguments "--base" ...
         setEnvironment();
+        // Format the BASE area.
         FusekiApp.ensureBaseArea(FUSEKI_BASE);
     }
 

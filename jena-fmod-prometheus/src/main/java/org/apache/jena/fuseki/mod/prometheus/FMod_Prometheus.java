@@ -35,7 +35,7 @@ public class FMod_Prometheus implements FusekiModule {
     public String name() { return "Prometheus Metrics"; }
 
     @Override public void start() {
-        Fuseki.configLog.info("Prometheus Metrics");
+        Fuseki.configLog.info("FMod Prometheus Metrics");
     }
 
     @Override public void prepare(FusekiServer.Builder serverBuilder, Set<String> datasetNames, Model configModel) {
