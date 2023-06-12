@@ -23,6 +23,7 @@ import java.util.Set;
 import org.apache.jena.atlas.logging.FmtLog;
 import org.apache.jena.fuseki.Fuseki;
 import org.apache.jena.fuseki.main.FusekiServer;
+import org.apache.jena.fuseki.main.sys.FusekiAutoModule;
 import org.apache.jena.fuseki.main.sys.FusekiModule;
 import org.apache.jena.fuseki.validation.DataValidator;
 import org.apache.jena.fuseki.validation.IRIValidator;
@@ -32,7 +33,7 @@ import org.apache.jena.rdf.model.Model;
 import org.eclipse.jetty.util.resource.Resource;
 import org.slf4j.Logger;
 
-public class FMod_UI implements FusekiModule {
+public class FMod_UI implements FusekiAutoModule {
 
     private static FusekiModule singleton = new FMod_UI();
     public static FusekiModule get() {

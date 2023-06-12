@@ -28,6 +28,7 @@ import org.apache.jena.fuseki.build.FusekiConfig;
 import org.apache.jena.fuseki.ctl.ActionCtl;
 import org.apache.jena.fuseki.main.FusekiServer;
 import org.apache.jena.fuseki.main.cmds.FusekiMain;
+import org.apache.jena.fuseki.main.sys.FusekiAutoModule;
 import org.apache.jena.fuseki.main.sys.FusekiModule;
 import org.apache.jena.fuseki.mgt.ActionBackup;
 import org.apache.jena.fuseki.mgt.ActionBackupList;
@@ -37,7 +38,7 @@ import org.apache.jena.fuseki.server.DataAccessPoint;
 import org.apache.jena.rdf.model.Model;
 import org.slf4j.Logger;
 
-public class FMod_Admin implements FusekiModule {
+public class FMod_Admin implements FusekiAutoModule {
 
     private static FusekiModule singleton = new FMod_Admin();
     public static FusekiModule get() {
@@ -50,7 +51,6 @@ public class FMod_Admin implements FusekiModule {
 
     @Override
     public void start() {
-        Fuseki.serverLog.info("FMod Admin");
         ArgModuleGeneral amg = new ArgModuleAdmin();
         FusekiMain.addArgModule(amg);
     }
@@ -70,7 +70,7 @@ public class FMod_Admin implements FusekiModule {
 
     @Override
     public String name() {
-        return "Admin";
+        return "FMod Admin";
     }
 
     @Override

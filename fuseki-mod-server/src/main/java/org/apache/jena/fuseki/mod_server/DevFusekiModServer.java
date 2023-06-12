@@ -29,7 +29,10 @@ import org.apache.jena.fuseki.mod.admin.FMod_Admin;
 import org.apache.jena.fuseki.mod.ui.FMod_UI;
 import org.apache.jena.fuseki.system.FusekiLogging;
 import org.apache.jena.http.HttpOp;
+import org.apache.jena.rdflink.RDFLink;
 import org.apache.jena.riot.WebContent;
+import org.apache.jena.sparql.exec.RowSet;
+import org.apache.jena.sparql.exec.RowSetOps;
 import org.apache.jena.sys.JenaSystem;
 
 public class DevFusekiModServer {
@@ -38,51 +41,73 @@ public class DevFusekiModServer {
 
     public static void main(String[] args) {
 
+
+
+//        07:57:43 INFO  Server          :: Module: FMod_UI (unknown)
+//        07:57:43 INFO  Server          :: Module: FMod_Admin (unknown)
+//        07:57:43 INFO  Server          :: Module: FMod_Shiro (unknown)
+//        07:57:43 INFO  Config          :: Fuseki UI load
+//        07:57:43 INFO  FMod_UI         :: UI Base = jar:file:/home/afs/.m2/repository/org/apache/jena/jena-fuseki-ui/4.9.0-SNAPSHOT/jena-fuseki-ui-4.9.0-SNAPSHOT.jar!/webapp
+//        07:57:43 INFO  Config          :: Fuseki UI loaded --<
+//        07:57:43 INFO  Config          :: Fuseki Admin load
+
 //        JenaSystem.DEBUG_INIT = true;
 //        //System.setProperty("fuseki.loglogging", "true");
 
         //System.setProperty("fuseki.logLoading", "true");
 
         JenaSystem.init();
-        //Done by InitFuseki
-        //FusekiModulesLoaded.load();
-        //FusekiModules fmods = FusekiModulesLoaded.loaded();
-        //FusekiModules fmods = FusekiModules.empty;
 
-        // Order matters
+//        // Order matters
         FusekiModules fmods = FusekiModules.create(FMod_UI.get(), FMod_Admin.get());
 
         System.setProperty("FUSEKI_BASE", "run");
         FileOps.clearAll("run");
 
+        System.err.println("Re-enable!");
+
+        // Auto-discovery also works after maven has run.
+        //FusekiModulesCtl.setup();
+
+        // Need to sort out /run/ initial source
         FusekiServer server = FusekiServer.create()
-                .setModules(fmods)
-                .port(4040)
+                //.setFusekiModules(fmods)
+                .port(0)
                 //.add("/ds", DatasetGraphFactory.createTxnMem())
                 .start();
 
+        String datasetURL = server.serverURL()+"ds";
 
-        String URL = "http://localhost:"+server.getPort()+"/ds";
-
+        String serverURL = server.serverURL()+"$/datasets";
         String name = URLEncoder.encode("/ds", StandardCharsets.UTF_8);
+        System.out.println(serverURL);
+
+        // Create dataset
         //http://localhost:4040/$/datasets
         //dbName=%2Fds&dbType=mem
-        HttpOp.httpPost("http://localhost:4040/$/datasets",
+
+        // basic auth. admin-pw
+        String adminURL = server.serverURL()+"$";
+        //AuthEnv.get().registerUsernamePassword(URI.create(adminURL), "admin","pw");
+
+        HttpOp.httpPost(adminURL+"/datasets",
                         WebContent.contentTypeHTMLForm,
                         BodyPublishers.ofString("dbName="+name+"&dbType=mem", StandardCharsets.UTF_8));
 
+        try ( RDFLink link = RDFLink.connectPW(datasetURL, "user1", "passwd1") ) {
+            link.update("INSERT DATA { <x:s> <x:p> 123 }");
+            RowSet rs = link.query("SELECT * {?s ?p ?o}").select();
+            RowSetOps.out(rs);
+        }
 
-
-        //AuthEnv.get().registerUsernamePassword(URI.create(URL), "user1", "passwd1");
-
-        //HttpOp.httpPost(url);
-
-        try {
-            server.join();
-        } catch (Throwable th) {
-            th.printStackTrace();
-        } finally {
-            System.exit(0);
+        if ( false ) {
+            try {
+                server.join();
+            } catch (Throwable th) {
+                th.printStackTrace();
+            } finally {
+                System.exit(0);
+            }
         }
     }
 }

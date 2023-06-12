@@ -23,16 +23,16 @@ import java.util.Set;
 import org.apache.jena.fuseki.Fuseki;
 import org.apache.jena.fuseki.ctl.ActionMetrics;
 import org.apache.jena.fuseki.main.FusekiServer;
-import org.apache.jena.fuseki.main.sys.FusekiModule;
+import org.apache.jena.fuseki.main.sys.FusekiAutoModule;
 import org.apache.jena.fuseki.metrics.MetricsProviderRegistry;
 import org.apache.jena.rdf.model.Model;
 
 /**
  * Prometheus Metrics
  */
-public class FMod_Prometheus implements FusekiModule {
+public class FMod_Prometheus implements FusekiAutoModule {
     @Override
-    public String name() { return "Prometheus Metrics"; }
+    public String name() { return "FMod Prometheus Metrics"; }
 
     @Override public void start() {
         Fuseki.configLog.info("FMod Prometheus Metrics");
