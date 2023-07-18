@@ -519,18 +519,6 @@ public class ActionDatasets extends ActionContainerItem {
             ServletOps.errorBadRequest("Unknown content type for triples: " + ct);
             return;
         }
-        // Don't log - assemblers are typically small.
-        // Adding this to the log confuses things.
-        // Reserve logging for data uploads.
-//        long len = request.getContentLengthLong();
-//        if ( action.verbose ) {
-//            if ( len >= 0 )
-//                alog.info(format("[%d]   Body: Content-Length=%d, Content-Type=%s, Charset=%s => %s", action.id, len,
-//                                ct.getContentType(), ct.getCharset(), lang.getName()));
-//            else
-//                alog.info(format("[%d]   Body: Content-Type=%s, Charset=%s => %s", action.id, ct.getContentType(),
-//                                ct.getCharset(), lang.getName()));
-//        }
         dest.prefix("root", base+"#");
         ActionLib.parseOrError(action, dest, lang, base);
     }

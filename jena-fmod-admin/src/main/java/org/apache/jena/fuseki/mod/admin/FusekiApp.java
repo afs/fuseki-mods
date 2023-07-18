@@ -236,7 +236,6 @@ public class FusekiApp {
 
     private static DataAccessPoint configFromTemplate(String templateFile, String datasetPath,
                                                       boolean allowUpdate, Map<String, String> params) {
-        DatasetDescriptionMap registry = new DatasetDescriptionMap();
         // ---- Setup
         if ( params == null ) {
             params = new HashMap<>();
@@ -284,6 +283,7 @@ public class FusekiApp {
             //  1 - clean model, remove "fu:serviceUpdate", "fu:serviceUpload", "fu:serviceReadGraphStore", "fu:serviceReadWriteGraphStore"
             //  2 - set a flag on DataAccessPoint
         }
+        DatasetDescriptionMap registry = new DatasetDescriptionMap();
         DataAccessPoint dap = FusekiConfig.buildDataAccessPoint(subject, registry);
         return dap;
     }
