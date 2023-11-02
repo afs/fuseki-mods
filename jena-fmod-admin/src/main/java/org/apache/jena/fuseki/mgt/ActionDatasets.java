@@ -27,8 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-import javax.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.atlas.RuntimeIOException;
 import org.apache.jena.atlas.io.IO;
@@ -378,7 +377,7 @@ public class ActionDatasets extends ActionContainerItem {
                 // configuration file, so the databases will not be associated with the server
                 // anymore.
 
-                boolean isTDB1 = org.apache.jena.tdb.sys.TDBInternal.isTDB1(dataService.getDataset());
+                boolean isTDB1 = org.apache.jena.tdb1.sys.TDBInternal.isTDB1(dataService.getDataset());
                 boolean isTDB2 = org.apache.jena.tdb2.sys.TDBInternal.isTDB2(dataService.getDataset());
 
                 // TODO This occasionally fails in tests due to outstanding transactions.

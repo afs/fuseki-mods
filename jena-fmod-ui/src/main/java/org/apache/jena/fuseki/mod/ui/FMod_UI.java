@@ -30,7 +30,7 @@ import org.apache.jena.fuseki.validation.IRIValidator;
 import org.apache.jena.fuseki.validation.QueryValidator;
 import org.apache.jena.fuseki.validation.UpdateValidator;
 import org.apache.jena.rdf.model.Model;
-import org.eclipse.jetty.util.resource.Resource;
+import org.eclipse.jetty.util.resource.ResourceFactory;
 import org.slf4j.Logger;
 
 public class FMod_UI implements FusekiAutoModule {
@@ -71,7 +71,7 @@ public class FMod_UI implements FusekiAutoModule {
         // Find the static content and set all resource lookups to this location.
 
         String resourceNameUI = "webapp";
-        org.eclipse.jetty.util.resource.Resource uiApp = Resource.newClassPathResource(resourceNameUI);
+        org.eclipse.jetty.util.resource.Resource uiApp = ResourceFactory.root().newResource(resourceNameUI);
         //jar:file:/home/afs/ASF/fuseki-mods/fuseki-mod-ui/jena-fuseki-ui.jar!/webapp
 
         if ( uiApp == null ) {

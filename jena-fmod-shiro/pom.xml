@@ -50,6 +50,7 @@
       <groupId>org.apache.shiro</groupId>
       <artifactId>shiro-web</artifactId>
       <version>${ver.shiro}</version>
+      <classifier>jakarta</classifier>
     </dependency>
 
     <dependency>

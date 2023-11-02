@@ -23,8 +23,7 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
+import jakarta.servlet.ServletContext;
 import org.apache.jena.fuseki.FusekiConfigException;
 import org.apache.jena.irix.IRIs;
 import org.apache.shiro.io.ResourceUtils;

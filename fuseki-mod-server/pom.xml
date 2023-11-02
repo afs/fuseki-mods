@@ -18,7 +18,7 @@
     <build.time.xsd>${maven.build.timestamp}</build.time.xsd>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <ver.jena>4.10.0-SNAPSHOT</ver.jena>
+    <ver.jena>5.0.0-SNAPSHOT</ver.jena>
     <ver.fmod>0.0.0-SNAPSHOT</ver.fmod>
 
     <ver.junit>4.13.2</ver.junit>

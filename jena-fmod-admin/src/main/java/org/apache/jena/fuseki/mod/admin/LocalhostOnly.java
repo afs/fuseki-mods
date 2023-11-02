@@ -24,10 +24,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.jena.fuseki.Fuseki;
 import org.apache.jena.web.HttpSC;
 import org.slf4j.Logger;

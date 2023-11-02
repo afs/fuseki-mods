@@ -25,9 +25,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.servlet.Filter;
-import javax.servlet.ServletContext;
-
+import jakarta.servlet.Filter;
+import jakarta.servlet.ServletContext;
 import org.apache.jena.atlas.lib.Lib;
 import org.apache.jena.fuseki.Fuseki;
 import org.apache.jena.fuseki.FusekiConfigException;
@@ -35,8 +34,8 @@ import org.apache.jena.fuseki.main.FusekiServer;
 import org.apache.jena.fuseki.main.sys.FusekiAutoModule;
 import org.apache.jena.rdf.model.Model;
 import org.apache.shiro.web.servlet.ShiroFilter;
-import org.eclipse.jetty.server.session.SessionHandler;
-import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee10.servlet.SessionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
