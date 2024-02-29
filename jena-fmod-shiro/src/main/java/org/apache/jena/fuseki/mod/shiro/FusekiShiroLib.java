@@ -26,7 +26,7 @@ import java.util.List;
 import jakarta.servlet.ServletContext;
 import org.apache.jena.fuseki.FusekiConfigException;
 import org.apache.jena.irix.IRIs;
-import org.apache.shiro.io.ResourceUtils;
+import org.apache.shiro.lang.io.ResourceUtils;
 import org.apache.shiro.web.env.EnvironmentLoaderListener;
 
 /*package*/ class FusekiShiroLib {
