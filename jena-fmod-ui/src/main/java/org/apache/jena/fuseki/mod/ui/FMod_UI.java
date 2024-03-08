@@ -71,7 +71,7 @@ public class FMod_UI implements FusekiAutoModule {
         // Find the static content and set all resource lookups to this location.
 
         String resourceNameUI = "webapp";
-        org.eclipse.jetty.util.resource.Resource uiApp = ResourceFactory.root().newResource(resourceNameUI);
+        org.eclipse.jetty.util.resource.Resource uiApp = ResourceFactory.root().newClassLoaderResource(resourceNameUI, false);
         //jar:file:/home/afs/ASF/fuseki-mods/fuseki-mod-ui/jena-fuseki-ui.jar!/webapp
 
         if ( uiApp == null ) {
