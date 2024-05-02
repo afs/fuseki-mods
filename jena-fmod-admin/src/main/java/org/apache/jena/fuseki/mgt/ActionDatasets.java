@@ -192,12 +192,6 @@ public class ActionDatasets extends ActionContainerItem {
                     RDFDataMgr.write(outCopy, model, Lang.TURTLE);
                 }
 
-                // Currently do nothing with the system database.
-                // In the future ... maybe ...
-//            Model modelSys = system.getNamedModel(gn.getURI());
-//            modelSys.removeAll(null, pStatus, null);
-//            modelSys.add(subject, pStatus, FusekiVocab.stateActive);
-
                 // Need to be in Resource space at this point.
                 DataAccessPoint dataAccessPoint = FusekiConfig.buildDataAccessPoint(subject, registry);
                 if ( dataAccessPoint == null ) {
@@ -360,7 +354,7 @@ public class ActionDatasets extends ActionContainerItem {
                 if  ( configurationFiles.size() > 1 ) {
                     // -- This should not happen.
                     action.log.warn(format("[%d] There are %d configuration files, not one.", action.id, configurationFiles.size()));
-                    ServletOps.errorOccurred(format("There are %d configuration files, not one. Delete not performed; clearup of the filesystem needed.",
+                    ServletOps.errorOccurred(format("There are %d configuration files, not one. Delete not performed; manual clean up of the filesystem needed.",
                                                     configurationFiles.size()));
                     return;
                 }
