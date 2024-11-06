@@ -28,7 +28,9 @@ import org.apache.jena.fuseki.metrics.MetricsProviderRegistry;
 import org.apache.jena.rdf.model.Model;
 
 /**
- * Prometheus Metrics
+ * Prometheus Metrics.
+ *
+ * PrometheusMetricsProvider
  */
 public class FMod_Prometheus implements FusekiAutoModule {
     @Override
@@ -36,6 +38,7 @@ public class FMod_Prometheus implements FusekiAutoModule {
 
     @Override public void start() {
         Fuseki.configLog.info("FMod Prometheus Metrics");
+        MetricsProviderRegistry.set(new PrometheusMetricsProvider());
     }
 
     @Override public void prepare(FusekiServer.Builder serverBuilder, Set<String> datasetNames, Model configModel) {
@@ -43,6 +46,6 @@ public class FMod_Prometheus implements FusekiAutoModule {
     }
 
     @Override public void server(FusekiServer server) {
-        MetricsProviderRegistry.bindPrometheus(server.getDataAccessPointRegistry());
+        MetricsProviderRegistry.dataAccessPointMetrics(server.getDataAccessPointRegistry());
     }
 }

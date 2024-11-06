@@ -18,24 +18,86 @@
     <build.time.xsd>${maven.build.timestamp}</build.time.xsd>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <ver.jena>5.0.0</ver.jena>
-    <ver.fmod>0.0.0-SNAPSHOT</ver.fmod>
+    <ver.jena>5.3.0-SNAPSHOT</ver.jena>
+	<!--<ver.fmod>0.0.0-SNAPSHOT</ver.fmod>-->
+	<ver.shiro>2.0.1</ver.shiro>
+	
+	<ver.junit5>5.11.3</ver.junit5>
+    <ver.junit5-platform>1.10.2</ver.junit5-platform>
 
     <ver.junit>4.13.2</ver.junit>
-    <ver.slf4j>1.7.36</ver.slf4j>
-    <ver.log4j2>2.20.0</ver.log4j2>
+    <ver.slf4j>2.0.16</ver.slf4j>
+    <ver.log4j2>2.24.1</ver.log4j2>
 
   </properties>
 
-  <dependencies>
+  <dependencyManagement>
+    <dependencies>
     
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${ver.junit5}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+    <dependency>
+      <groupId>org.apache.jena</groupId>
+      <artifactId>jena-bom</artifactId>
+      <version>${ver.jena}</version>
+        <type>pom</type>
+        <scope>import</scope>
+    </dependency>
+    
+
+    
+      <dependency>
+        <groupId>org.apache.shiro</groupId>
+        <artifactId>shiro-bom</artifactId>
+        <version>${ver.shiro}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>${ver.log4j2}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+
+<!--    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${ver.junit}</version>
+      <scope>test</scope>
+    </dependency>
+-->    
+
+  </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
     <dependency>
       <groupId>org.apache.jena</groupId>
       <artifactId>jena-fuseki-main</artifactId>
-      <version>${ver.jena}</version>
+      
+    </dependency>
+    
+	<dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-core</artifactId>
     </dependency>
 
     <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-web</artifactId>
+      <classifier>jakarta</classifier>
+    </dependency>
+
+<!--    <dependency>
       <groupId>org.apache.jena.fuseki</groupId>
       <artifactId>jena-fmod-shiro</artifactId>
       <version>${ver.fmod}</version>
@@ -51,26 +113,50 @@
       <artifactId>jena-fmod-ui</artifactId>
       <version>${ver.fmod}</version>
     </dependency>
-
+-->
     <!-- Log4j2 -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-slf4j2-impl</artifactId>
-      <version>${ver.log4j2}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
-      <version>${ver.log4j2}</version>
     </dependency>
 
-    <dependency>
+<!--    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${ver.junit}</version>
       <scope>test</scope>
     </dependency>
-    
+-->    
+	<!--
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+    -->
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <build>

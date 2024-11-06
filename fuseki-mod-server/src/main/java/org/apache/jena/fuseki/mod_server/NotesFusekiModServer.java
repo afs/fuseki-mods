@@ -18,8 +18,34 @@
 
 package org.apache.jena.fuseki.mod_server;
 
+import java.util.concurrent.atomic.LongAdder;
 
 public class NotesFusekiModServer {
+
+    static public class Counter2 {
+        // Not for synchronization
+        private LongAdder counter = new LongAdder();
+
+        public Counter2()    {}
+
+        public void inc()   { counter.increment(); }
+        public void dec()   { counter.decrement(); }
+        public long value() { return counter.longValue(); }
+
+        @Override
+        public String toString() {
+            return counter.toString();
+        }
+    }
+
+    // 1Fuseki v1
+    //  in jena-fuseki-main : org.apache.jena.fuseki.fmods
+    //  FMod_UI
+    //  FMod_Admin
+    //  FMod_Shiro
+    //  (FMod_GeoSPARQL)
+    //  FMod_Prometheus
+
 
     // Copy template files.
     //   mod_shiro uses FUSEKI_SHIRO
@@ -42,7 +68,7 @@ public class NotesFusekiModServer {
     // jena-fuseki-mods - excludes fuseki main
 
     // == mod-admin
-    // [ ] Not updatign configurations?
+    // [ ] Not updating configurations?
     // [ ] Crashes due to NPE adding argument.
 
     //  == mod-shiro

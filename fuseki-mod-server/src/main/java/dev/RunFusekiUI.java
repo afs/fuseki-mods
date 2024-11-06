@@ -20,36 +20,19 @@ package dev;
 
 import org.apache.jena.fuseki.main.FusekiServer;
 import org.apache.jena.fuseki.system.FusekiLogging;
-import org.apache.jena.http.HttpOp;
 import org.apache.jena.sparql.core.DatasetGraph;
 import org.apache.jena.sparql.core.DatasetGraphFactory;
-import org.apache.jena.sparql.exec.http.GSP;
-import org.apache.jena.sparql.exec.http.Params;
 
-public class RunFusekiPrometheus {
+public class RunFusekiUI {
+
     public static void main(String ... a) {
-
         FusekiLogging.setLogging();
-        //FusekiModules.add(new FMod_Admin());
+        //FusekiModules.add(new FMod_UI());
         DatasetGraph dsg = DatasetGraphFactory.createTxnMem();
         FusekiServer server = FusekiServer.create()
-                //.verbose(true)
                 .add("/ds", dsg)
-                .port(0)
+                .port(3030)
                 .build()
                 .start();
-
-        String HOST = "localhost";
-        GSP.service("http://"+HOST+":"+server.getHttpPort()+"/ds").defaultGraph().GET();
-
-        //http://localhost:3030/$/datasets
-        // Body: dbName=%2Fds&dbType=mem
-
-        // Create!
-        Params params = Params.create().add("dbName", "/ds2").add("dbType", "mem");
-        String baseURL = "http://"+HOST+":"+server.getHttpPort();
-
-        String x = HttpOp.httpPostRtnString(baseURL+"/$/metrics");
-        System.out.println(x);
     }
 }
