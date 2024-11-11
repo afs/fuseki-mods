@@ -112,7 +112,6 @@ public class ActionDatasets extends ActionContainerItem {
     @Override
     protected JsonValue execPostContainer(HttpAction action) {
         UUID uuid = UUID.randomUUID();
-        DatasetDescriptionMap registry = new DatasetDescriptionMap();
 
         ContentType ct = ActionLib.getContentType(action);
 
@@ -124,6 +123,8 @@ public class ActionDatasets extends ActionContainerItem {
         boolean succeeded = false;
         String systemFileCopy = null;
         String configFile = null;
+
+        DatasetDescriptionMap registry = new DatasetDescriptionMap();
 
         synchronized (FusekiAdmin.SystemLock) {
             try {
@@ -193,7 +194,7 @@ public class ActionDatasets extends ActionContainerItem {
                 }
 
                 // Need to be in Resource space at this point.
-                DataAccessPoint dataAccessPoint = FusekiConfig.buildDataAccessPoint(subject, registry);
+                DataAccessPoint dataAccessPoint = FusekiConfig.buildDataAccessPoint(subject.getModel().getGraph(), subject.asNode(), registry);
                 if ( dataAccessPoint == null ) {
                     FmtLog.error(action.log, "Failed to build DataAccessPoint: datasetPath = %s; DataAccessPoint name = %s", datasetPath, dataAccessPoint);
                     ServletOps.errorBadRequest("Failed to build DataAccessPoint");
