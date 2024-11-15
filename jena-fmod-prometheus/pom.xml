@@ -19,7 +19,7 @@
   <name>Apache Jena - Fuseki Module - Prometheus Metrics</name>
 
   <properties>
-   	<ver.micrometer>1.14.0</ver.micrometer>
+   	<ver.micrometer>1.14.1</ver.micrometer>
     <automatic.module.name>org.apache.jena.jena.mod.prometheus</automatic.module.name>
   </properties>
 
